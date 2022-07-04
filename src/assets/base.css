@@ -1,0 +1,39 @@
+/* color palette from <https://github.com/vuejs/theme> */
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800&display=swap');
+
+:root {
+  --color-background: rgb(241, 241, 241);
+  --color-primary: rgb(255, 255, 255);
+  --color-text: rgb(102, 102, 102);
+  --color-platinum: rgb(229, 228, 226);
+  --color-muted: rgb(170, 170, 170);
+  --color-accent-blue: rgb(0, 95, 184);
+  --color-accent-yellow: rgb(255, 255, 0);
+
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  font-weight: normal;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+  margin: 0;
+  font-size: 1.2rem;
+  font-family: Jost, sans-serif;
+  font-weight: 400;
+  color: var(--color-text);
+  background-color: var(--color-background);
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

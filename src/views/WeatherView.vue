@@ -1,0 +1,307 @@
+<script setup>
+import { weatherDataStore } from "../stores/weather";
+let weatherStore = weatherDataStore()
+
+</script>
+
+<template>
+  <div class="bg-div">
+    <img :src="weatherStore.backgroundUrl" :alt="weatherStore.conditionString" />
+  </div>
+  <div class="container">
+
+    <div class="card">
+      <div class="card-contents">
+        <div class="card-header">
+          <form @submit.prevent="weatherStore.fetchWeatherData(weatherStore.cityInput)" method="POST">
+            <input @focusin="weatherStore.cityInput = ' '" type="text" name="city" id="city-input"
+              :placeholder="weatherStore.weatherInfo.cityName"
+              @focusout="weatherStore.cityInput = weatherStore.weatherInfo.cityName" v-model="weatherStore.cityInput" />
+            <button type="submit" @click="weatherStore.fetchWeatherData(weatherStore.cityInput)"
+              v-if="weatherStore.weatherInfo" class="country">
+              ({{ weatherStore.weatherInfo.countryName
+              }})</button>
+          </form>
+        </div>
+        <div class="condition-wrapper">
+          <span id="condition">
+            {{
+                weatherStore.weatherInfo.weatherCondition
+            }}
+          </span>
+        </div>
+        <div class="condition-summary">
+          <div id="circle" class="circle">
+            <span id="weather-icon"><img class="weather-icon" :src="weatherStore.weatherInfo.weatherIconUrl"
+                :alt="weatherStore.weatherInfo.weatherIcon" /></span>
+            <span id="temperature" class="temperature">{{ weatherStore.weatherInfo.currentTemp
+            }}<sup>°</sup></span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="feels-like">Feels Like <span class="strong">{{
+              weatherStore.weatherInfo.subjectiveTemp
+          }}°C</span>
+          </div>
+          <hr>
+          <div class="measurements">
+            <div><img src="../assets/humidity.png" width="24px" /><span class="item-value" id="humidity">{{
+                weatherStore.weatherInfo.humidity
+            }}%</span>
+            </div>
+            <div>
+              <font-awesome-icon icon="fa-solid fa-cloud" />
+              <span class="item-value" id="cloud-cover">{{
+                  weatherStore.weatherInfo.cloudCover
+              }}%</span>
+            </div>
+            <div>
+              <font-awesome-icon icon="fa-solid fa-wind" />
+              <span class="item-value" id="wind">{{
+                  weatherStore.weatherInfo.windSpeed
+              }} km/h</span>
+            </div>
+          </div>
+          <div class="sunrise-sunset-img-wrapper">
+            <img src="../assets/sunrise-gray.png" alt="sunrise image">
+            <span class="current-time-header">NOW</span>
+            <img src="../assets/sunset-gray.png" alt="sunset image">
+          </div>
+          <div class="time-values">
+            <div><span id="sunrise"></span>{{ weatherStore.weatherInfo.sunrise }}</div>
+            <div><span id="weather-location-time">{{ weatherStore.weatherInfo.weatherLocationTime }}</span></div>
+            <div><span id="sunset">{{ weatherStore.weatherInfo.sunset }}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css');
+
+:root {
+  --color-background: #F1F1F1;
+  --color-primary: #FFFFFF;
+  --color-text: #666666;
+  --color-platinum: #E5E4E2;
+  --color-muted: #AAAAAA;
+
+}
+
+@keyframes grow_in {
+  0% {
+    transform: scale(0.75, 0.75);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+  margin: 0;
+  font-size: 1.2rem;
+  font-family: Jost, sans-serif;
+  font-weight: 400;
+  color: var(--color-text);
+  background-color: transparent;
+}
+
+.bg-div img {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  min-width: 300px;
+  min-height: 85vh;
+  align-items: center;
+  padding: 0 0.25rem;
+  z-index: 10;
+}
+
+.card {
+  padding: 30px 15px;
+  margin: 20px 0;
+  border-radius: 20px;
+  height: 540px;
+  width: 380px;
+  border: 1px solid var(--color-platinum);
+  box-shadow: 1px 1px 3px var(--color-grey);
+  background-color: var(--color-background);
+  animation: grow_in 1s ease;
+}
+
+.card-contents {
+  text-align: center;
+  align-items: baseline;
+  padding: 0 10px;
+}
+
+.card-header {
+  display: flex;
+  position: relative;
+  margin: 0 0 40px 0;
+  display: flex;
+  justify-content: space-between;
+  width: auto;
+  z-index: 10;
+}
+
+form {
+  margin: 0;
+  flex: auto;
+  width: 100%;
+}
+
+input[name=city] {
+  flex: auto;
+  width: 100%;
+  background: var(--color-background);
+  border-radius: 30px;
+  border: 2px solid rgba(128, 128, 128, 0.25);
+  padding: 10px 20px;
+  font-size: 0.91rem;
+  font-weight: 500;
+}
+
+input[name=city]:focus {
+  box-shadow: 0 0 6px 6px #c4c4c494;
+  border: 2px solid rgba(128, 128, 128, 0.25);
+  background-color: var(--color-primary);
+}
+
+button {
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  border: none;
+  background-color: transparent;
+  font-size: 1.1rem;
+}
+
+.country {
+  color: var(--color-muted);
+}
+
+.error {
+  background-color: aquamarine;
+  padding: 0;
+  margin: 0;
+  color: red;
+  font-size: 0.9rem;
+}
+
+.condition-wrapper {
+  margin: 40px 0;
+}
+
+.condition-summary {
+  margin: 20px 0 30px 0;
+}
+
+.card-body {
+  position: static;
+  margin-top: 20px;
+  display: block;
+}
+
+.circle {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  height: 140px;
+  width: 140px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 50%;
+  box-shadow: 0 0 8px 6px #c4c4c494;
+}
+
+.weather-icon {
+  position: absolute;
+  top: -30px;
+  left: -28px;
+  -webkit-filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.03)) drop-shadow(-5px -5px 0 rgba(0, 0, 0, 0.08));
+  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.03)) drop-shadow(-5px -5px 0 rgba(0, 0, 0, 0.08));
+}
+
+.temperature {
+  padding-top: 15px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 80px;
+  color: #000000;
+  font-weight: 800;
+  z-index: 10;
+}
+
+sup {
+  font-size: 2.6rem;
+  font-weight: 400;
+}
+
+.feels-like {
+  margin-bottom: 30px;
+  font-size: 1.2rem;
+}
+
+.strong {
+  font-weight: 600;
+}
+
+hr {
+  color: #c4c4c494;
+}
+
+.measurements {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  margin: 10px 0 18px 0;
+}
+
+.sunrise-sunset-img-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 100px;
+}
+
+.sunrise-sunset-img-wrapper img {
+  margin-bottom: 5px;
+  height: 15px;
+}
+
+.current-time-header {
+  font-size: 1.05rem;
+  margin-top: 5px;
+  line-height: 0.8rem;
+}
+
+.time-values {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+}
+</style>
