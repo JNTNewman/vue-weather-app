@@ -3,6 +3,9 @@ import { ref } from "vue";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const api_base = 'https://api.openweathermap.org/data/2.5/';
+const api_url = 'http://localhost:3050/';
+
+//const
 
 export const weatherDataStore = defineStore({
   id: "weather",
@@ -71,11 +74,11 @@ export const weatherDataStore = defineStore({
         this.weatherInfo.weatherCondition = this.capitalizeWords(`${this.cityInput} ${response.statusText}`)
         this.weatherInfo.weatherIcon = ''
         this.weatherInfo.weatherIconUrl = ''
-        this.weatherInfo.currentTemp = 0
-        this.weatherInfo.subjectiveTemp = 0
-        this.weatherInfo.humidity = 0
-        this.weatherInfo.windSpeed = 0
-        this.weatherInfo.cloudCover = 0
+        this.weatherInfo.currentTemp = '?'
+        this.weatherInfo.subjectiveTemp = '?'
+        this.weatherInfo.humidity = '?'
+        this.weatherInfo.windSpeed = '?'
+        this.weatherInfo.cloudCover = '?'
         this.weatherInfo.sunrise = '00:00'
         this.weatherInfo.sunset = '00:00'
         this.weatherInfo.weatherLocationTime = '00:00'

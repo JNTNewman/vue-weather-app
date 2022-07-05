@@ -1,5 +1,6 @@
 <script setup>
 import { weatherDataStore } from "../stores/weather";
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 let weatherStore = weatherDataStore()
 
 </script>
@@ -45,18 +46,21 @@ let weatherStore = weatherDataStore()
           </div>
           <hr>
           <div class="measurements">
-            <div><img src="../assets/humidity.png" width="24px" /><span class="item-value" id="humidity">{{
-                weatherStore.weatherInfo.humidity
-            }}%</span>
+            <div>
+              <!-- <img src="../assets/humidity.png" class="fa-icon" /> -->
+              <font-awesome-icon icon="fa-droplet" class="fa-icon" />
+              <span class="item-value" id="humidity">{{
+                  weatherStore.weatherInfo.humidity
+              }}%</span>
             </div>
             <div>
-              <font-awesome-icon icon="fa-solid fa-cloud" />
+              <font-awesome-icon icon="fa-cloud" class="fa-icon" />
               <span class="item-value" id="cloud-cover">{{
                   weatherStore.weatherInfo.cloudCover
               }}%</span>
             </div>
             <div>
-              <font-awesome-icon icon="fa-solid fa-wind" />
+              <font-awesome-icon icon="wind" class="fa-icon" />
               <span class="item-value" id="wind">{{
                   weatherStore.weatherInfo.windSpeed
               }} km/h</span>
@@ -244,6 +248,11 @@ button {
   left: -28px;
   -webkit-filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.03)) drop-shadow(-5px -5px 0 rgba(0, 0, 0, 0.08));
   filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.03)) drop-shadow(-5px -5px 0 rgba(0, 0, 0, 0.08));
+}
+
+.fa-icon {
+  width: 1.5rem;
+  padding-right: 0.1rem;
 }
 
 .temperature {
