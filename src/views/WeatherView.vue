@@ -87,9 +87,8 @@ if (navigator.geolocation) {
   </div>
 </template>
 
-<style>
+<style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css');
 
 :root {
   --color-background: #F1F1F1;

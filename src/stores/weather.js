@@ -24,7 +24,7 @@ export const weatherDataStore = defineStore({
       weatherLocationTime: '',
     }),
     unitsType: 'metric',
-    cityInput: 'Kiev', // Default city input
+    cityInput: 'Vostok', // Default city input
     longitudePos: '',
     latitudePos: '',
     conditionString: '',
@@ -110,6 +110,7 @@ export const weatherDataStore = defineStore({
         position => {
           this.latitudePos = position.coords.latitude
           this.longitudePos = position.coords.longitude
+          this.fetchWeatherData(null)
         },
         error => {
           console.log(error.message);

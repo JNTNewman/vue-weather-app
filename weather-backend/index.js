@@ -18,6 +18,7 @@ app.get('/api/', (request, response) => {
     let query = request.query
     query.appid = API_KEY
     queryString = qs.stringify(query)
+    console.log(queryString);
     axios.get(`${api_base}${queryString}`)
     .then(res => {
         data = res.data
