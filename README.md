@@ -1,6 +1,7 @@
 Javascript Weather App
 ======================
 
+<img src="../vue-weather-app/src/assets/app-sample-screen.png" />
 Welcome 👋
 ----------
 
@@ -18,7 +19,8 @@ This weather app utilizes the [OpenWeather API](https://openweathermap.org/) and
 Favicon
 -------
 
-I used the sun icon from FreeIconsPNG site. [![Download Sun Icon](https://www.freeiconspng.com/uploads/sun-icon-22.png)](https://www.freeiconspng.com/img/8579 "Image from freeiconspng.com")
+I used the sun icon from FreeIconsPNG site.
+<a href="https://www.freeiconspng.com/img/8579" title="Image from freeiconspng.com"><img src="https://www.freeiconspng.com/uploads/sun-icon-22.png" width="32" alt="Download Sun Icon" /></a>
 
 Project Setup
 -------------
