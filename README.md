@@ -1,7 +1,7 @@
 Javascript Weather App
 ======================
 
-<img src="../vue-weather-app/src/assets/app-sample-screen.png" />
+<img src="../v1.1.0/src/assets/app-sample-screen.png" />
 Welcome 👋
 ----------
 
