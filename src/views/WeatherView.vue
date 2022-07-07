@@ -2,6 +2,11 @@
 import { weatherDataStore } from "../stores/weather";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 let weatherStore = weatherDataStore()
+if (navigator.geolocation) {
+  weatherStore.getLocation()
+} else {
+  weatherStore.fetchWeatherData(weatherStore.cityInput) // Load default data
+}
 
 </script>
 
@@ -25,7 +30,7 @@ let weatherStore = weatherDataStore()
           </form>
         </div>
         <div class="condition-wrapper">
-          <span id="condition">
+          <span id="condition" :class="weatherStore.responseError ? 'warning-text' : 'normal-text'">
             {{
                 weatherStore.weatherInfo.weatherCondition
             }}
@@ -63,7 +68,7 @@ let weatherStore = weatherDataStore()
               <font-awesome-icon icon="wind" class="fa-icon" />
               <span class="item-value" id="wind">{{
                   weatherStore.weatherInfo.windSpeed
-              }} km/h</span>
+              }}km/h</span>
             </div>
           </div>
           <div class="sunrise-sunset-img-wrapper">
@@ -92,6 +97,7 @@ let weatherStore = weatherDataStore()
   --color-text: #666666;
   --color-platinum: #E5E4E2;
   --color-muted: #AAAAAA;
+  --color-warning: #CC3300;
 
 }
 
@@ -208,12 +214,12 @@ button {
   color: var(--color-muted);
 }
 
-.error {
-  background-color: aquamarine;
-  padding: 0;
-  margin: 0;
+.warning-text {
   color: red;
-  font-size: 0.9rem;
+}
+
+.normal-text {
+  color: var(--color-text);
 }
 
 .condition-wrapper {
