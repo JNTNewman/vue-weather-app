@@ -1,8 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-const API_KEY = import.meta.env.VITE_API_KEY;
-const api_base = 'https://api.openweathermap.org/data/2.5/weather?';
 const api_url = 'http://localhost:3050/api';
 
 export const weatherDataStore = defineStore({

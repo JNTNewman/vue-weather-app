@@ -65,6 +65,7 @@
     <p>Feel free to clone, fork and improve as you desire.</p>
     <p><em>John Newman</em></p>
   </div>
+  <p></p>
 </template>
 
 <style scoped>

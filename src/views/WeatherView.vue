@@ -20,7 +20,7 @@ if (navigator.geolocation) {
       <div class="card-contents">
         <div class="card-header">
           <form @submit.prevent="weatherStore.fetchWeatherData(weatherStore.cityInput)" method="POST">
-            <input @focusin="weatherStore.cityInput = ' '" type="text" name="city" id="city-input"
+            <input @focusin="weatherStore.cityInput = ' '" type="text" name="city"
               :placeholder="weatherStore.weatherInfo.cityName"
               @focusout="weatherStore.cityInput = weatherStore.weatherInfo.cityName" v-model="weatherStore.cityInput" />
             <button type="submit" @click="weatherStore.fetchWeatherData(weatherStore.cityInput)"
@@ -38,9 +38,9 @@ if (navigator.geolocation) {
         </div>
         <div class="condition-summary">
           <div id="circle" class="circle">
-            <span id="weather-icon"><img class="weather-icon" :src="weatherStore.weatherInfo.weatherIconUrl"
+            <span><img class="weather-icon" :src="weatherStore.weatherInfo.weatherIconUrl"
                 :alt="weatherStore.weatherInfo.weatherIcon" /></span>
-            <span id="temperature" class="temperature">{{ weatherStore.weatherInfo.currentTemp
+            <span class="temperature">{{ weatherStore.weatherInfo.currentTemp
             }}<sup>°</sup></span>
           </div>
         </div>
@@ -54,19 +54,19 @@ if (navigator.geolocation) {
             <div>
               <!-- <img src="../assets/humidity.png" class="fa-icon" /> -->
               <font-awesome-icon icon="fa-droplet" class="fa-icon" />
-              <span class="item-value" id="humidity">{{
+              <span class="item-value">{{
                   weatherStore.weatherInfo.humidity
               }}%</span>
             </div>
             <div>
               <font-awesome-icon icon="fa-cloud" class="fa-icon" />
-              <span class="item-value" id="cloud-cover">{{
+              <span class="item-value">{{
                   weatherStore.weatherInfo.cloudCover
               }}%</span>
             </div>
             <div>
               <font-awesome-icon icon="wind" class="fa-icon" />
-              <span class="item-value" id="wind">{{
+              <span class="item-value">{{
                   weatherStore.weatherInfo.windSpeed
               }}km/h</span>
             </div>
