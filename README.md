@@ -27,14 +27,14 @@ Project Setup
 
 1. Clone the github repository which should contain the code for the Vue frontend and the Express backend that handles the calls to the OpenWeatherMap API.
 2. Sign up and create and API Key at [OpenWeatherMap](https://openweathermap.org/).
-3. Store your key as WEATHER\_APP\_ID = "YOUR\_API\_KEY"; in a .env file such as at the root of the weather-backend.
-4. Run npm init from the frontend and backend directories and run npm run dev to get both frontend and backend servers running.
+3. Store your key as `WEATHER\_APP\_ID = "YOUR\_API\_KEY";` in a .env file such as at the root of the weather-backend.
+4. Run `npm init` from the frontend and backend directories and run `npm run dev` to get both frontend and backend servers running.
 5. Access <http://localhost:3000> to get to frontend.
 
 Description
 -----------
 
-The app takes city name query and returns information about weather conditions: temperature, feel, wind speed, sky condition, humidity, cloud cover, sunrise, sunset and actual time in that city. The background of the container div changes depending on the weather conditions and night and day. Images for the background are from [Unsplash.com](https://unsplash.com/). I have tried to have images to cover all possible conditions but I may have missed some.
+The app takes city name query and returns information about weather conditions: temperature, feel, wind speed, sky condition, humidity, cloud cover, sunrise, sunset and actual time in that city. The background of the container div changes depending on the weather conditions and night and day. Images for the background are from [unsplash.com](https://unsplash.com/). I have tried to have images to cover all possible conditions but I may have missed some.
 
 You may also input the query string as City Name, State and Country (eg. San Francisco, US or San Francisco, CA, US)
 
