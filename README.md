@@ -2,6 +2,7 @@ Javascript Weather App
 ======================
 
 <img src="../v1.1.0/src/assets/app-sample-screen.png" />
+
 Welcome 👋
 ----------
 
