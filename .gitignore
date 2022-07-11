@@ -1,3 +1,6 @@
+#OTHERS
+v.*
+
 # ENVARS
 .env
 

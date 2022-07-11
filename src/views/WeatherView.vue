@@ -1,85 +1,118 @@
 <script setup>
 import { weatherDataStore } from "../stores/weather";
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-let weatherStore = weatherDataStore()
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+let weatherStore = weatherDataStore();
 if (navigator.geolocation) {
-  weatherStore.getLocation()
+  weatherStore.getLocation();
 } else {
-  weatherStore.fetchWeatherData(weatherStore.cityInput) // Load default data
+  weatherStore.fetchWeatherData(weatherStore.cityInput); // Load default data
 }
-
 </script>
 
 <template>
   <div class="bg-div">
-    <img :src="weatherStore.backgroundUrl" :alt="weatherStore.conditionString" />
+    <img
+      :src="weatherStore.backgroundUrl"
+      :alt="weatherStore.conditionString"
+    />
   </div>
   <div class="container">
-
     <div class="card">
       <div class="card-contents">
         <div class="card-header">
-          <form @submit.prevent="weatherStore.fetchWeatherData(weatherStore.cityInput)" method="POST">
-            <input @focusin="weatherStore.cityInput = ' '" type="text" name="city"
+          <form
+            @submit.prevent="
+              weatherStore.fetchWeatherData(weatherStore.cityInput)
+            "
+            method="POST"
+          >
+            <input
+              @focusin="weatherStore.cityInput = ' '"
+              type="text"
+              name="city"
               :placeholder="weatherStore.weatherInfo.cityName"
-              @focusout="weatherStore.cityInput = weatherStore.weatherInfo.cityName" v-model="weatherStore.cityInput" />
-            <button type="submit" @click="weatherStore.fetchWeatherData(weatherStore.cityInput)"
-              v-if="weatherStore.weatherInfo" class="country">
-              ({{ weatherStore.weatherInfo.countryName
-              }})</button>
+              @focusout="
+                weatherStore.cityInput = weatherStore.weatherInfo.cityName
+              "
+              v-model="weatherStore.cityInput"
+            />
+            <button
+              type="submit"
+              @click="weatherStore.fetchWeatherData(weatherStore.cityInput)"
+              v-if="weatherStore.weatherInfo"
+              class="country"
+            >
+              ({{ weatherStore.weatherInfo.countryName }})
+            </button>
           </form>
         </div>
         <div class="condition-wrapper">
-          <span id="condition" :class="weatherStore.responseError ? 'warning-text' : 'normal-text'">
-            {{
-                weatherStore.weatherInfo.weatherCondition
-            }}
+          <span
+            id="condition"
+            :class="weatherStore.responseError ? 'warning-text' : 'normal-text'"
+          >
+            {{ weatherStore.weatherInfo.weatherCondition }}
           </span>
         </div>
         <div class="condition-summary">
           <div id="circle" class="circle">
-            <span><img class="weather-icon" :src="weatherStore.weatherInfo.weatherIconUrl"
-                :alt="weatherStore.weatherInfo.weatherIcon" /></span>
-            <span class="temperature">{{ weatherStore.weatherInfo.currentTemp
-            }}<sup>°</sup></span>
+            <span
+              ><img
+                class="weather-icon"
+                :src="weatherStore.weatherInfo.weatherIconUrl"
+                :alt="weatherStore.weatherInfo.weatherIcon"
+            /></span>
+            <span class="temperature"
+              >{{ weatherStore.weatherInfo.currentTemp }}<sup>°</sup></span
+            >
           </div>
         </div>
         <div class="card-body">
-          <div class="feels-like">Feels Like <span class="strong">{{
-              weatherStore.weatherInfo.subjectiveTemp
-          }}°C</span>
+          <div class="feels-like">
+            Feels Like
+            <span class="strong"
+              >{{ weatherStore.weatherInfo.subjectiveTemp }}°C</span
+            >
           </div>
-          <hr>
+          <hr />
           <div class="measurements">
             <div>
               <!-- <img src="../assets/humidity.png" class="fa-icon" /> -->
               <font-awesome-icon icon="fa-droplet" class="fa-icon" />
-              <span class="item-value">{{
-                  weatherStore.weatherInfo.humidity
-              }}%</span>
+              <span class="item-value"
+                >{{ weatherStore.weatherInfo.humidity }}%</span
+              >
             </div>
             <div>
               <font-awesome-icon icon="fa-cloud" class="fa-icon" />
-              <span class="item-value">{{
-                  weatherStore.weatherInfo.cloudCover
-              }}%</span>
+              <span class="item-value"
+                >{{ weatherStore.weatherInfo.cloudCover }}%</span
+              >
             </div>
             <div>
               <font-awesome-icon icon="wind" class="fa-icon" />
-              <span class="item-value">{{
-                  weatherStore.weatherInfo.windSpeed
-              }}km/h</span>
+              <span class="item-value"
+                >{{ weatherStore.weatherInfo.windSpeed }}km/h</span
+              >
             </div>
           </div>
           <div class="sunrise-sunset-img-wrapper">
-            <img src="../assets/sunrise-gray.png" alt="sunrise image">
+            <img src="../assets/sunrise-gray.png" alt="sunrise image" />
             <span class="current-time-header">NOW</span>
-            <img src="../assets/sunset-gray.png" alt="sunset image">
+            <img src="../assets/sunset-gray.png" alt="sunset image" />
           </div>
           <div class="time-values">
-            <div><span id="sunrise"></span>{{ weatherStore.weatherInfo.sunrise }}</div>
-            <div><span id="weather-location-time">{{ weatherStore.weatherInfo.weatherLocationTime }}</span></div>
-            <div><span id="sunset">{{ weatherStore.weatherInfo.sunset }}</span></div>
+            <div>
+              <span id="sunrise"></span>{{ weatherStore.weatherInfo.sunrise }}
+            </div>
+            <div>
+              <span id="weather-location-time">{{
+                weatherStore.weatherInfo.weatherLocationTime
+              }}</span>
+            </div>
+            <div>
+              <span id="sunset">{{ weatherStore.weatherInfo.sunset }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -88,16 +121,15 @@ if (navigator.geolocation) {
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-background: #F1F1F1;
-  --color-primary: #FFFFFF;
+  --color-background: #f1f1f1;
+  --color-primary: #ffffff;
   --color-text: #666666;
-  --color-platinum: #E5E4E2;
-  --color-muted: #AAAAAA;
-  --color-warning: #CC3300;
-
+  --color-platinum: #e5e4e2;
+  --color-muted: #aaaaaa;
+  --color-warning: #cc3300;
 }
 
 @keyframes grow_in {
@@ -183,7 +215,7 @@ form {
   width: 100%;
 }
 
-input[name=city] {
+input[name="city"] {
   flex: auto;
   width: 100%;
   background: var(--color-background);
@@ -194,7 +226,7 @@ input[name=city] {
   font-weight: 500;
 }
 
-input[name=city]:focus {
+input[name="city"]:focus {
   box-shadow: 0 0 6px 6px #c4c4c494;
   border: 2px solid rgba(128, 128, 128, 0.25);
   background-color: var(--color-primary);
@@ -251,8 +283,10 @@ button {
   position: absolute;
   top: -30px;
   left: -28px;
-  -webkit-filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.03)) drop-shadow(-5px -5px 0 rgba(0, 0, 0, 0.08));
-  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.03)) drop-shadow(-5px -5px 0 rgba(0, 0, 0, 0.08));
+  -webkit-filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.03))
+    drop-shadow(-5px -5px 0 rgba(0, 0, 0, 0.08));
+  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.03))
+    drop-shadow(-5px -5px 0 rgba(0, 0, 0, 0.08));
 }
 
 .fa-icon {
